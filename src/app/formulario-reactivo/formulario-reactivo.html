@@ -1,0 +1,67 @@
+<div class="contenedor">
+  <h2>Registro de usuario</h2>
+
+  <form [formGroup]="formulario" (ngSubmit)="registrar()">
+
+    <div class="campo">
+      <label for="nombre">Nombre:</label>
+      <input id="nombre" type="text" formControlName="nombre">
+      <small *ngIf="formulario.get('nombre')?.touched && formulario.get('nombre')?.hasError('required')">
+        El nombre es obligatorio.
+      </small>
+    </div>
+
+    <div class="campo">
+      <label for="apellidos">Apellidos:</label>
+      <input id="apellidos" type="text" formControlName="apellidos">
+      <small *ngIf="formulario.get('apellidos')?.touched && formulario.get('apellidos')?.hasError('required')">
+        Los apellidos son obligatorios.
+      </small>
+    </div>
+
+    <div class="campo">
+      <label for="correo">Correo electrónico:</label>
+      <input id="correo" type="email" formControlName="correo">
+
+      <small *ngIf="formulario.get('correo')?.touched && formulario.get('correo')?.hasError('required')">
+        El correo es obligatorio.
+      </small>
+      <small *ngIf="formulario.get('correo')?.touched && formulario.get('correo')?.hasError('email')">
+        Ingresa un correo válido.
+      </small>
+    </div>
+
+    <div class="campo">
+      <label for="telefono">Teléfono:</label>
+      <input id="telefono" type="tel" formControlName="telefono">
+      <small *ngIf="formulario.get('telefono')?.touched && formulario.get('telefono')?.hasError('required')">
+        El teléfono es obligatorio.
+      </small>
+    </div>
+
+    <div class="campo">
+      <label for="contrasena">Contraseña:</label>
+      <input id="contrasena" type="password" formControlName="contrasena">
+
+      <small *ngIf="formulario.get('contrasena')?.touched && formulario.get('contrasena')?.hasError('required')">
+        La contraseña es obligatoria.
+      </small>
+      <small *ngIf="formulario.get('contrasena')?.touched && formulario.get('contrasena')?.hasError('minlength')">
+        La contraseña debe tener mínimo 8 caracteres.
+      </small>
+    </div>
+
+    <button type="submit" [disabled]="formulario.invalid">
+      Registrar
+    </button>
+  </form>
+
+  <div class="resultado" *ngIf="datosRegistrados">
+    <h3>Registro exitoso</h3>
+    <p><strong>Nombre:</strong> {{ datosRegistrados.nombre }}</p>
+    <p><strong>Apellidos:</strong> {{ datosRegistrados.apellidos }}</p>
+    <p><strong>Correo:</strong> {{ datosRegistrados.correo }}</p>
+    <p><strong>Teléfono:</strong> {{ datosRegistrados.telefono }}</p>
+    <p><strong>Contraseña:</strong> No se muestra por seguridad.</p>
+  </div>
+</div>
